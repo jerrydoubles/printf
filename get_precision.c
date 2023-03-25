@@ -6,36 +6,35 @@
  * @i: List of arguments to be printed.
  * @list: list of arguments.
  *
- * Return: Precision.
+ * Return: precision.
  */
 
 int get_precision(const char *format, int *i, va_list list)
 {
 	int curr_i = *i + 1;
-	int precision = 0;
+	int precision = -1;
 
 	if (format[curr_i] != '.')
 {
 	return (precision);
 	}
 
-	for (curr_i += 1; format[curr_i] != '\0'; curr_i++)
-{
-	if (is_digit(format[curr_i]))
-{
-		precision *= 10;
-		precision += format[curr_i] - '0';
-		}
-		else if (format[curr_i] == '*')
-{
-		curr_i++;
-		precision = va_arg(list, int);
-		break;
-		}
-		else
+	precision = 0;
+	curr_i++;
 
-		break;
-		}
+	if (format[curr_i] == '*')
+{
+	curr_i++;
+	precision = va_arg(list, int);
+	}
+	else
+{
+	while (is_digit(format[curr_i]))
+{
+	precision *= 10;
+	precision += format[curr_i] - '0';
+	curr_i++;
+	}
 	}
 
 	*i = curr_i - 1;

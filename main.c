@@ -40,6 +40,6 @@ int main(void)
 	printf("Len:[%d]\n", len2);
 	printf("Unknown:[%r]\n");
 	printf("Unknown:[%r]\n");
-
+	_printf("%.*x", 6, 1024);
 	return (0);
 }
